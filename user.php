@@ -1,6 +1,6 @@
 <?php
 include 'koneksi.php';
-session_start();
+// session_start();
 include 'authcheck.php';
 $view = $connect->query("SELECT u.*,r.nama as nama_role FROM user as u INNER JOIN role as r ON u.role_id=r.id_role");
 
@@ -28,6 +28,23 @@ if ($_SESSION['userid']) {
     <title>User</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container">
+    <a class="navbar-brand" href="#">Starbhak Mart</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ms-auto">
+        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+        <a class="nav-link" href="barang.php">Barang</a>
+        <a class="nav-link" href="role.php">role</a>
+        <a class="nav-link" href="user.php">User</a>
+    </div>
+    </div>
+</div>
+</nav>
+
 <div class="container">
 <?php
 if (isset($_SESSION['success'])&& $_SESSION['success']!="") {?>

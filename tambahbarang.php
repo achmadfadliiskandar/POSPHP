@@ -4,11 +4,12 @@ session_start();
 
 if (isset($_POST['simpan'])) {
     $nama = $_POST['nama'];
+    $gambar = $_POST['gambar'];
     $harga = $_POST['harga'];
     $stok = $_POST['stok'];
     
     // untuk menyimpan ke database
-    mysqli_query($connect,"INSERT INTO barang VALUES ('','$nama','$harga','$stok')");
+    mysqli_query($connect,"INSERT INTO barang VALUES ('','$nama','$gambar','$harga','$stok')");
 
     $_SESSION['success'] = "barang berhasil di tambahkan";
 
@@ -37,6 +38,10 @@ if (isset($_POST['simpan'])) {
 <div class="mb-3">
 <label for="nama" class="form-label">Nama Barang</label>
 <input type="text" class="form-control" id="nama" name="nama">
+</div>
+<div class="mb-3">
+<label for="gambar" class="form-label">Gambar Barang</label>
+<input type="text" class="form-control" id="gambar" name="gambar">
 </div>
 <div class="mb-3">
 <label for="harga" class="form-label">Harga Barang</label>

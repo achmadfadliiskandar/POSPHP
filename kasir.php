@@ -37,7 +37,7 @@ if (isset($_SESSION['cart'])) {
 <form action="keranjang_act.php" method="POST">
 <div class="input-group">
 <select name="id_barang" class="form-control">
-<option>Pilih Barang</option>
+<!-- <option>Pilih Barang</option> -->
 <?php while ($row = mysqli_fetch_array($barang)) {?>
 <option value="<?=$row['id_barang']?>"><?=$row['nama']?></option>
 <?php } ?>

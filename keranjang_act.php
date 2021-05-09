@@ -14,7 +14,7 @@ if (isset($_POST['id_barang'])) {
         'id'=>$b['id_barang'],
         'nama'=>$b['nama'],
         'harga'=>$b['harga'],
-        'qty'=>$qty
+        'qty'=>1
     ];
     $_SESSION['cart'][]=$barang;
     krsort($_SESSION['cart']);

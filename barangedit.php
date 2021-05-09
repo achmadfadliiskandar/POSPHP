@@ -11,13 +11,14 @@ if (isset($_GET['id'])) {
 if (isset($_POST['update'])) {
     $id = $_GET['id'];
     $nama = $_POST['nama'];
+    $gambar = $_POST['gambar'];
     $harga = $_POST['harga'];
     $stok = $_POST['stok'];
 
-    mysqli_query($connect,"UPDATE barang SET nama='$nama',harga='$harga',stok='$stok' WHERE id_barang='$id'");
+    mysqli_query($connect,"UPDATE barang SET nama='$nama',gambar='$gambar',harga='$harga',stok='$stok' WHERE id_barang='$id'");
     header("Location:barang.php");
 }
-session_start();
+// session_start();
 $_SESSION['success'] = "barang berhasil di Ubah";
 ?>
 
@@ -42,6 +43,10 @@ $_SESSION['success'] = "barang berhasil di Ubah";
 <div class="mb-3">
 <label for="nama" class="form-label">Nama Barang</label>
 <input type="text" class="form-control" id="nama" name="nama" value="<?=$data['nama']?>">
+</div>
+<div class="mb-3">
+<label for="gambar" class="form-label">Gambar Barang</label>
+<input type="text" class="form-control" id="gambar" name="gambar" value="<?=$data['gambar']?>">
 </div>
 <div class="mb-3">
 <label for="harga" class="form-label">Harga Barang</label>

@@ -1,6 +1,6 @@
 <?php
 include 'koneksi.php';
-session_start();
+// session_start();
 include 'authcheck.php';
 $view = $connect->query("SELECT * FROM barang");
 ?>
@@ -19,6 +19,22 @@ $view = $connect->query("SELECT * FROM barang");
     <title>Barang</title>
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container">
+    <a class="navbar-brand" href="#">Starbhak Mart</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ms-auto">
+        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+        <a class="nav-link" href="barang.php">Barang</a>
+        <a class="nav-link" href="role.php">role</a>
+        <a class="nav-link" href="user.php">User</a>
+    </div>
+    </div>
+</div>
+</nav>
 <div class="container">
 <?php
 if (isset($_SESSION['success'])&& $_SESSION['success']!="") {?>
@@ -31,32 +47,23 @@ $_SESSION['success']='';
 ?>
     <h1 class="text-center">Barang</h1>
     <a href="tambahbarang.php" class="btn btn-primary my-3">Tambah Barang  </a>
-    <table class="table table-bordered">
-<thead>
-    <tr>
-    <th scope="col">Kode Barang</th>
-    <th scope="col">Nama</th>
-    <th scope="col">Harga</th>
-    <th scope="col">Stok</th>
-    <th scope="col">Aksi</th>
-    </tr>
-</thead>
-<tbody>
-<?php
-while ($row = $view->fetch_array()) {?>
-    <tr>
-    <td><?= $row['id_barang']?></td>
-    <td><?= $row['nama']?></td>
-    <td><?= $row['harga']?></td>
-    <td><?= $row['stok']?></td>
-    <td>
+    <div class="row">
+    <?php
+    while ($row = $view->fetch_array()) {?>
+    <div class="col-md-2">
+    <div class="card" style="width: 100%;">
+    <img src="<?= $row['gambar']?>" class="img-top" alt="">
+    <div class="card-body">
+    <p>Kode Barang : <?= $row['id_barang']?></p>
+    <p>Nama Barang : <?= $row['nama']?></p>
+    <p>Harga Barang : <?= $row['harga']?></p>
+    <p>Stok Barang : <?= $row['stok']?></p>
     <a class="btn btn-success" href="barangedit.php?id=<?= $row['id_barang'] ?>">Edit</a> 
     <a class="btn btn-danger" href="baranghapus.php?id=<?= $row['id_barang'] ?>" onclick="return confirm('apakah anda yakin?')">Hapus</a>
-	</td>
-    </tr>
-<?php } ?>
-</tbody>
-</table>
+    </div>
+    </div>
+    </div>
+    <?php } ?>
 </div>
     <!-- Optional JavaScript; choose one of the two! -->
 

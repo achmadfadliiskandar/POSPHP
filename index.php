@@ -45,7 +45,7 @@ if ($_SESSION['userid']) {
 </nav>
 
 <div class="col-lg-12">
-<h1 class="text-center">Selamat Datang</h1>
+<h1 class="text-center">Selamat Datang : <?=$_SESSION['nama']?></h1>
 <p class="text-center">silahkan pilih menu di atas</p>
 <div class="container">
 <a href="logout.php" class="btn btn-danger col-lg-12">Logout</a>
