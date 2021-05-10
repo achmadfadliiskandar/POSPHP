@@ -18,36 +18,57 @@ if (isset($_SESSION['cart'])) {
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
 
-    <title>Kasir</title>
+    <title>Kasir Starbhak Mart</title>
 </head>
 <body>
 <div class="container">
-<h1 class="text-center">Halaman Kasir</h1>
+<h1 class="text-center">Halaman Kasir Starbhak Mart</h1>
 <h1>Kasir</h1>
 <h2><?=$_SESSION['nama']?></h2>
 <a href="keranjang_reset.php" class="btn btn-success">Reset Keranjang</a>
 <a href="logout.php" class="btn btn-danger">Log Out</a>
+<button class="btn btn-info" onclick="functionjs()">Petunjuk Erorr</button>
+<script>
+function functionjs() {
+    alert("jika terjadi error saat masuk klik reset keranjang");
+}
+</script>
 <hr>
 <div class="row">
 <div class="col-md-8">
-<form action="keranjang_act.php" method="POST">
-<div class="input-group">
-<select name="id_barang" class="form-control">
-<!-- <option>Pilih Barang</option> -->
-<?php while ($row = mysqli_fetch_array($barang)) {?>
-<option value="<?=$row['id_barang']?>"><?=$row['nama']?></option>
-<?php } ?>
-<input type="number" name="qty" class="form-control" id="">
-</select>
-<span class="input-group-btn">
-<button class="btn btn-primary" type="submit">Tambah</button>
-</span>
+<div class="row">
+    <?php
+    while ($row = $barang->fetch_array()) {?>
+    <div class="col-md-4 mt-2 mb-2">
+    <div class="card" style="width: 100%;">
+    <img src="<?= $row['gambar']?>" class="img-top" alt="">
+    <div class="card-body">
+    <p>Nama Barang : <?= $row['nama']?></p>
+    <p>Harga Barang : <?= $row['harga']?></p>
+    <p>Stok Barang : <?= $row['stok']?></p>
+    <form action="keranjang_act.php" method="POST">
+    <div class="input-group">
+    <select name="id_barang" class="form-control" style="display:none;">
+    <option value="<?=$row['id_barang']?>"><?=$row['nama']?></option>
+    </select>
+    <!-- <input type="number" name="qty" class="form-control" id=""> -->
+    <!-- <span class="input-group-btn">
+    <button class="btn btn-primary" type="submit">Tambah</button>
+    </span> -->
+    <button class="btn btn-primary w-100" type="submit">Tambah</button>
+    </div>
+    </form>
+    </div>
+    </div>
+    </div>
+    <?php } ?>
 </div>
-</form>
+</div>
+<div class="col-md-4">
 <form action="keranjang_update.php" method="post">
 <table class="table table-bordered border-primary mt-3">
 <tr>
@@ -67,10 +88,9 @@ if (isset($_SESSION['cart'])) {
 </tr>
 <?php } ?>
 </table>
-<button type="submit" class="btn btn-success">Perbaharui</button>
+<button type="submit" class="btn btn-success">Update</button>
 </form>
-</div>
-<div class="col-md-4">
+
 <h3>Total Belanja Rp : <?=number_format($sum)?></h3>
 <form action="transaksi_act.php" method="post">
 <input type="hidden" name="total" value="<?=$sum?>">
@@ -119,5 +139,5 @@ return clean;
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
     -->
-  </body>
+</body>
 </html>
