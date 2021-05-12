@@ -31,10 +31,10 @@ if (isset($_SESSION['cart'])) {
 <h2><?=$_SESSION['nama']?></h2>
 <a href="keranjang_reset.php" class="btn btn-success">Reset Keranjang</a>
 <a href="logout.php" class="btn btn-danger">Log Out</a>
-<button class="btn btn-info" onclick="functionjs()">Petunjuk Erorr</button>
+<button class="btn btn-info" onclick="functionjs()">Cara Penggunaan</button>
 <script>
 function functionjs() {
-    alert("jika terjadi error saat masuk klik reset keranjang");
+    alert("silahkan klik reset keranjang terlebih dahulu");
 }
 </script>
 <hr>
@@ -78,6 +78,7 @@ function functionjs() {
 <th>Total semua</th>
 <th>Aksi</th>
 </tr>
+<?php if (isset($_SESSION['cart'])): ?>
 <?php foreach ($_SESSION['cart'] as $key => $value) {?>
 <tr>
 <td><?=$value['nama']?></td>
@@ -87,6 +88,7 @@ function functionjs() {
 <td><a href="keranjang_hapus.php?id=<?=$value['id']?>" class="btn btn-danger">Hapus</a></td>
 </tr>
 <?php } ?>
+<?php endif; ?>
 </table>
 <button type="submit" class="btn btn-success">Update</button>
 </form>
