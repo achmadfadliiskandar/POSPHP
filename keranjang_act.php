@@ -3,6 +3,9 @@
 include 'koneksi.php';
 include 'authcheckkasir.php';
 
+// bertujuan untuk menghilangkan semua error
+error_reporting(0);
+
 if (isset($_POST['id_barang'])) {
     $id_barang = $_POST['id_barang'];
     // $qty = $_POST['qty'];
