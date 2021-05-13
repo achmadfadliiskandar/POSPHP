@@ -3,11 +3,6 @@
 include 'koneksi.php';
 include 'authcheckkasir.php';
 
-error_reporting(0);
-
-echo "lupa baca cara penggunaanya ya ? silahkan back to kasir";
-echo "<a href='kasir.php'>back to kasir</a>";
-
 if (isset($_POST['id_barang'])) {
     $id_barang = $_POST['id_barang'];
     // $qty = $_POST['qty'];
