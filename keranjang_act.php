@@ -6,7 +6,7 @@ include 'authcheckkasir.php';
 // bertujuan untuk menghilangkan semua error
 error_reporting(0);
 
-print("welcome to layout server ");
+var_dump("welcome to layout server ");
 echo "<a href='kasir.php'>back to kasir</a>";
 
 if (isset($_POST['id_barang'])) {
