@@ -8,7 +8,13 @@ $barang  =  mysqli_query($connect,"SELECT * FROM barang");
 $sum = 0;
 if (isset($_SESSION['cart'])) {
     foreach ($_SESSION['cart'] as $key => $value) {
-        $sum += ((int)$value['harga'] * (int)$value['qty']);
+        // kondisi if dan else 
+        // yang if = di bawah 200 RB yang else diatas 200 RB
+        if ($sum < 200000) {
+            $sum += ((int)$value['harga'] * (int)$value['qty']);
+        }else {
+            $sum += ((int)$value['harga'] * (int)$value['qty']) - 50000 + 10000 ;
+        }
     }
 }
 ?>
@@ -39,7 +45,7 @@ function functionjs() {
 </script>
 <hr>
 <div class="row">
-<div class="col-md-8">
+<div class="col-md-7">
 <div class="row">
     <?php
     while ($row = $barang->fetch_array()) {?>
@@ -68,7 +74,7 @@ function functionjs() {
     <?php } ?>
 </div>
 </div>
-<div class="col-md-4">
+<div class="col-md-5">
 <form action="keranjang_update.php" method="post">
 <table class="table table-bordered border-primary mt-3">
 <tr>
@@ -94,9 +100,10 @@ function functionjs() {
 </form>
 
 <h3>Total Belanja Rp : <?=number_format($sum)?></h3>
+<span>(Jika pembelian diatas 200 Rb mendapatkan diskon sebesar 50 Rb dan Tambahan Ppn 10 RB)</span>
 <form action="transaksi_act.php" method="post">
 <input type="hidden" name="total" value="<?=$sum?>">
-<div class="form-group">
+<div class="form-group mt-2">
 <label for="bayar">Bayar</label>
 <input type="text" id="bayar" name="bayar" class="form-control" min="<?php number_format($sum)?>">
 </div>
