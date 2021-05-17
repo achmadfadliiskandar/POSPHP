@@ -46,7 +46,7 @@ if (isset($_SESSION['cart'])) {
 <button class="btn btn-info" onclick="functionjs()">Cara Penggunaan</button>
 <script>
 function functionjs() {
-    alert("silahkan klik reset keranjang terlebih dahulu");
+    alert("silahkan klik reset keranjang terlebih dahulu untuk permulaan terima kasih");
 }
 </script>
 <hr>
