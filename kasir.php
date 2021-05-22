@@ -108,7 +108,7 @@ function functionjs() {
 <h3>Total Belanja Rp : <?=number_format($sum)?></h3>
 <p>Harga Sebenarnya  : <?=number_format($ts)?></p>
 <span>jika pembelanjaan customer
-sampai 200 Rb maka customer tsb mendapatkan DISKON dadakan/kejutan(jika beruntung) sebesar 50% dan + PPN 10%  sekian terima kasih</span>
+sampai 200 Rb maka customer tsb mendapatkan DISKON dadakan/kejutan(jika beruntung) sebesar 50 RB dan + PPN 10 RB  sekian terima kasih</span>
 <form action="transaksi_act.php" method="post">
 <input type="hidden" name="total" value="<?=$sum?>">
 <div class="form-group mt-2">
