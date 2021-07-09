@@ -6,22 +6,32 @@ include 'authcheckkasir.php';
 $barang  =  mysqli_query($connect,"SELECT * FROM barang");
 
 $sum = 0;
+$ppn = 1000;
+$diskon = 2500;
 if (isset($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $key => $value) {
-        // kondisi if dan else 
-        // yang if = di bawah 200 RB yang else diatas 200 RB
-        if ($sum < 200000) {
-            $sum += ((int)$value['harga'] * (int)$value['qty']);
-        }else {
-            $sum += ((int)$value['harga'] * (int)$value['qty']) - 50000 + 10000 ;
-        }
-    }
+foreach ($_SESSION['cart'] as $key => $value) {
+// start total semua
+if ($sum < 200000) {
+    $sum += ((int)$value['harga'] * (int)$value['qty']) - $ppn + $diskon;
+}else {
+    $sum += ((int)$value['harga'] * (int)$value['qty']);
 }
-$ts = 0;
-if (isset($_SESSION['cart'])) {
-    foreach ($_SESSION['cart'] as $key => $value) {
-        $ts += ((int)$value['harga'] * (int)$value['qty']);
+//  finish total semua
+}
+// ppn
+foreach ($_SESSION['cart'] as $key => $value) {
+    $ppn = $sum + $ppn;
+    // end ppn
+}
+// diskon
+foreach ($_SESSION['cart'] as $key => $value) {
+    if ($sum > $diskon) {
+        $diskon += $sum % $diskon;
+    }else {
+        $diskon += 0;
     }
+    // diskon
+}
 }
 ?>
 <!doctype html>
@@ -37,7 +47,7 @@ if (isset($_SESSION['cart'])) {
     <title>Kasir Starbhak Mart</title>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
 <h1 class="text-center">Halaman Kasir Starbhak Mart</h1>
 <h1>Kasir</h1>
 <h2><?=$_SESSION['nama']?></h2>
@@ -60,7 +70,7 @@ function functionjs() {
     <img src="<?= $row['gambar']?>" class="img-top" alt="">
     <div class="card-body">
     <p>Nama Barang : <?= $row['nama']?></p>
-    <p>Harga Barang : <?= $row['harga']?></p>
+    <p>Harga Barang : <?= number_format($row['harga'],-2,".",".")?></p>
     <p>Stok Barang : <?= $row['stok']?></p>
     <form action="keranjang_act.php" method="POST">
     <div class="input-group">
@@ -71,7 +81,7 @@ function functionjs() {
     <!-- <span class="input-group-btn">
     <button class="btn btn-primary" type="submit">Tambah</button>
     </span> -->
-    <button class="btn btn-primary w-100" type="submit">Tambah</button>
+    <button class="btn btn-primary w-100 h-199" type="submit">Tambah</button>
     </div>
     </form>
     </div>
@@ -94,26 +104,25 @@ function functionjs() {
 <?php foreach ($_SESSION['cart'] as $key => $value) {?>
 <tr>
 <td><?=$value['nama']?></td>
-<td><?=number_format($value['harga'])?></td>
+<td><?=number_format($value['harga'],-2,",",".")?></td>
 <td><input type="number" name="qty[]" id="" class="form-control" value="<?=$value['qty']?>"></td>
-<td><?=number_format((int)$value['qty']*(int)$value['harga'])?></td>
+<td><?=number_format((int)$value['qty']*(int)$value['harga'],-2,",",".")?></td>
 <td><a href="keranjang_hapus.php?id=<?=$value['id']?>" class="btn btn-danger">Hapus</a></td>
 </tr>
 <?php } ?>
 <?php endif; ?>
 </table>
-<button type="submit" class="btn btn-success">Update</button>
+<button type="submit" class="btn btn-success my-2">Update</button>
 </form>
 
-<h3>Total Belanja Rp : <?=number_format($sum)?></h3>
-<p>Harga Sebenarnya  : <?=number_format($ts)?></p>
-<span>jika pembelanjaan customer
-sampai 200 Rb maka customer tsb mendapatkan DISKON dadakan/kejutan(jika beruntung) sebesar 50 RB dan + PPN 10 RB  sekian terima kasih</span>
+<strong class="text-danger d-block">Diskon(50%) : Rp <?=number_format($diskon,-2,".",".")?></strong>
+<strong class="text-primary">PPN(10%) : Rp <?=number_format($ppn,-2,".",".")?></strong>
+<h3>Total Belanja Rp : <?=number_format($sum,-2,".",".")?></h3>
 <form action="transaksi_act.php" method="post">
 <input type="hidden" name="total" value="<?=$sum?>">
 <div class="form-group mt-2">
 <label for="bayar">Bayar</label>
-<input type="text" id="bayar" name="bayar" class="form-control" min="<?php number_format($sum)?>">
+<input type="text" id="bayar" name="bayar" class="form-control">
 </div>
 <button class="btn btn-primary my-3 w-100">Bayar Sekarang</button>
 </form>
@@ -157,4 +166,9 @@ return clean;
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
     -->
 </body>
+<style>
+.card:hover{
+    border:1px solid #A9A9A9;
+}
+</style>
 </html>
