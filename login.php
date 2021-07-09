@@ -36,9 +36,29 @@ if (isset($_POST['masuk']))
     <title>Login</title>
 </head>
 <body>
-<div class="container">
-<h1 class="text-center">Login</h1>
-<form method="post" class="form-signin">
+    <style>
+        body{
+            background-image:url("https://www.ilmubahasa.net/wp-content/uploads/2018/10/backgroundkeren1-630x380.jpg");
+            background-size:cover;
+            background-repeat:no repeat;
+        }
+        form{
+            width:50%;
+            color: #fff;
+        }
+        @media only screen and (max-width: 600px) {
+            form{
+            width:100%;
+            margin-bottom: 20px;
+            margin-top:20px;
+            color: #fff;
+        }
+        }
+        }
+    </style>
+<div class="container" style="margin-top:150px;">
+<h1 class="text-center text-white">Login</h1>
+<form method="post" class="form-signin ms-auto me-auto">
 <?php if (isset($_SESSION['error']) && $_SESSION['error'] != '') { ?>
 <div class="alert alert-danger" role="alert">
     <?=$_SESSION['error']?>
