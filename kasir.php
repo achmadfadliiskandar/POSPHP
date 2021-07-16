@@ -2,6 +2,7 @@
 // session_start();
 include 'koneksi.php';
 include 'authcheckkasir.php';
+error_reporting(0);
 
 $barang  =  mysqli_query($connect,"SELECT * FROM barang");
 
@@ -11,11 +12,11 @@ $diskon = 2500;
 if (isset($_SESSION['cart'])) {
 foreach ($_SESSION['cart'] as $key => $value) {
 // start total semua
-if ($sum < 200000) {
-    $sum += ((int)$value['harga'] * (int)$value['qty']) - $ppn + $diskon;
-}else {
-    $sum += ((int)$value['harga'] * (int)$value['qty']);
+if ($sum && 200000) {
+    $sum += ((int)$value['harga'] * (int)$value['qty'] - $ppn + $diskon);
 }
+$sum += ((int)$value['harga'] * (int)$value['qty']);
+
 //  finish total semua
 }
 // ppn
@@ -25,11 +26,12 @@ foreach ($_SESSION['cart'] as $key => $value) {
 }
 // diskon
 foreach ($_SESSION['cart'] as $key => $value) {
-    if ($sum > $diskon) {
-        $diskon += $sum % $diskon;
-    }else {
-        $diskon += 0;
-    }
+   if ($sum >= 20000) {
+    $diskon += $sum % $diskon;
+   } else {
+    $diskon+= 0;
+   }
+   
     // diskon
 }
 }
@@ -120,10 +122,16 @@ function functionjs() {
 <h3>Total Belanja Rp : <?=number_format($sum,-2,".",".")?></h3>
 <form action="transaksi_act.php" method="post">
 <input type="hidden" name="total" value="<?=$sum?>">
-<div class="form-group mt-2">
-<label for="bayar">Bayar</label>
-<input type="text" id="bayar" name="bayar" class="form-control">
-</div>
+<?php
+if ($_SESSION['cart'] != false) {
+echo "<div class='form-group mt-2'>";
+echo "<label for='bayar'>Bayar</label>";
+echo "<input type='text' id='bayar' name='bayar' class='form-control'>";
+echo "</div>";
+} else {
+    echo "<div class='alert alert-danger'>silahkan belanja terlebih dahulu</div>";
+}
+?>
 <button class="btn btn-primary my-3 w-100">Bayar Sekarang</button>
 </form>
 </div>
