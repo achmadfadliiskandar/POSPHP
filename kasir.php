@@ -26,13 +26,12 @@ foreach ($_SESSION['cart'] as $key => $value) {
 }
 // diskon
 foreach ($_SESSION['cart'] as $key => $value) {
-   if ($sum >= 20000) {
+if ($sum >= 20000) {
     $diskon += $sum % $diskon;
-   } else {
+} else {
     $diskon+= 0;
-   }
-   
-    // diskon
+}
+// diskon
 }
 }
 ?>
