@@ -127,11 +127,13 @@ echo "<div class='form-group mt-2'>";
 echo "<label for='bayar'>Bayar</label>";
 echo "<input type='text' id='bayar' name='bayar' class='form-control'>";
 echo "</div>";
+echo "<button class='btn btn-primary my-3 w-100'>Bayar Sekarang</button>";
 } else {
     echo "<div class='alert alert-danger'>silahkan belanja terlebih dahulu</div>";
+    echo "<button disabled class='btn btn-primary my-3 w-100'>Bayar Sekarang</button>";
 }
 ?>
-<button class="btn btn-primary my-3 w-100">Bayar Sekarang</button>
+<!-- <button class="btn btn-primary my-3 w-100">Bayar Sekarang</button> -->
 </form>
 </div>
 </div>
