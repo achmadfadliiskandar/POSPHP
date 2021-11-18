@@ -54,9 +54,10 @@ if ($sum >= 20000) {
 <h2><?=$_SESSION['nama']?></h2>
 <a href="keranjang_reset.php" class="btn btn-success">Reset Keranjang</a>
 <a href="logout.php" class="btn btn-danger">Log Out</a>
-<button class="btn btn-info" onclick="functionjs()">Cara Penggunaan</button>
+<button class="btn btn-info" onclick="functionjs()" id="panduan">Cara Penggunaan</button>
 <script>
 function functionjs() {
+    document.getElementById("panduan").disabled = true;
     alert("silahkan klik reset keranjang terlebih dahulu untuk permulaan terima kasih");
 }
 </script>
